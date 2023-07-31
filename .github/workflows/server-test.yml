@@ -62,7 +62,7 @@ jobs:
 
 
       - name: Set up OpenGauss
-        uses: lgj101/opengauss-action@v1
+        uses: lgj101/opengauss-action@v1.1
         with:
           GS_VERSION: 'latest'
           GS_USERNAME: 'root'
