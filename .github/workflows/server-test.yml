@@ -64,7 +64,7 @@ jobs:
       - name: Set up OpenGauss
         uses: lgj101/opengauss-action@v1
         with:
-          opengauss version: 'latest'
-          opengauss user: 'root'
-          opengauss password: 'kubevelaSQL123'
+          GS_VERSION: 'latest'
+          GS_USERNAME: 'root'
+          GS_PASSWORD: 'kubevelaSQL123'
 
