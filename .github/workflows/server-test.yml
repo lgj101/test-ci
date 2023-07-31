@@ -1,0 +1,39 @@
+name: VelaUX APIServer Test
+
+on:
+  push:
+    branches:
+      - main
+      - master
+      - release-*
+    tags:
+      - v*
+  workflow_dispatch: { }
+  pull_request:
+    branches:
+      - main
+      - master
+      - release-*
+
+env:
+  # Common versions
+  GO_VERSION: '1.19'
+
+permissions:
+  contents: read
+
+jobs:
+
+  server-unit-tests:
+    runs-on: ubuntu-20.04
+    needs: detect-noop
+    if: needs.detect-noop.outputs.noop != 'true'
+
+    steps:
+      - name: Set up OpenGauss
+        uses: lgj101/opengauss-action@v1
+        with:
+          opengauss version: 'latest'
+          opengauss user: 'root'
+          opengauss password: 'kubevelaSQL123'
+
