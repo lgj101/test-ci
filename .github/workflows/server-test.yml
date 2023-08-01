@@ -70,7 +70,7 @@ jobs:
 
 
       - name: Set up OpenGauss
-        uses: lgj101/opengauss-action@v1.5
+        uses: lgj101/opengauss-action@v1.6
         with:
           GS_VERSION: 'latest'
           GS_DB: 'kubevela'
