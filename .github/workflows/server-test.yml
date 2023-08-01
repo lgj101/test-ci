@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - release-*
+      - master
     tags:
       - v*
   workflow_dispatch: { }
@@ -12,6 +13,7 @@ on:
     branches:
       - main
       - release-*
+      - master
 
 env:
   # Common versions
@@ -60,6 +62,12 @@ jobs:
           key: ${{ runner.os }}-pkg-${{ hashFiles('**/go.sum') }}
           restore-keys: ${{ runner.os }}-pkg-
 
+      - name: Install ginkgo
+        run: |
+          sudo sed -i 's/azure\.//' /etc/apt/sources.list
+          sudo apt-get update
+          sudo apt-get install -y golang-ginkgo-dev
+
 
       - name: Set up OpenGauss
         uses: lgj101/opengauss-action@v1.5
@@ -70,4 +78,7 @@ jobs:
           GS_PASSWORD: 'Kubevela-123'
           HOST_PORT: 15432
           CONTAINER_PORT: 5432
+
+      - name: Run api server unit test
+        run: make unit-test-server
 
